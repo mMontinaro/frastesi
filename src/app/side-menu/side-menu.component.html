@@ -1,0 +1,22 @@
+<mat-drawer-container class="container my-5" [hasBackdrop]="false" style="height: 100%;">
+    <mat-drawer #drawer [mode]="mode.value">
+        <ul class="mx-3 my-5 px-3">
+            <li class="py-2 my-1" *ngFor="let menuItem of menuItems; let i = index" [routerLink]="[menuItem.url]" (click)="selectItem(i)"
+                [class.selected]="selectedItemIndex === i">
+                {{ menuItem.label }}
+            </li>
+        </ul>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <mat-form-field hidden>
+            <mat-select #mode value="push">
+            </mat-select>
+        </mat-form-field>
+        <button class="my-4" type="button" title="Toggle side menu" mat-raised-button (click)="drawer.toggle()">
+            Espandi menu laterale
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
