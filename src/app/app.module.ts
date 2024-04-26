@@ -15,6 +15,7 @@ import { CasiComponent } from './casi/casi.component';
 import { MacchineComponent } from './macchine/macchine.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule, 
     MatButtonModule,
     FontAwesomeModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()
