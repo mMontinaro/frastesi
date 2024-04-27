@@ -16,6 +16,10 @@ import { MacchineComponent } from './macchine/macchine.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
+import { MacchineTableComponent } from './macchine/macchine-table/macchine-table.component';
+import { CasiTableComponent } from './casi/casi-table/casi-table.component';
+import { MacchineCasiTableComponent } from './macchine-casi-table/macchine-casi-table.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { HttpClientModule } from '@angular/common/http';
     SideMenuComponent,
     HomeComponent,
     CasiComponent,
-    MacchineComponent
+    MacchineComponent,
+    MacchineTableComponent,
+    CasiTableComponent,
+    MacchineCasiTableComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     FontAwesomeModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()

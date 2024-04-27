@@ -19,3 +19,16 @@ export const MacchineTableHeaders =
     'Data Distruzione',
     'Azioni'
 ]
+
+export const MacchineCasiTableHeaders =
+[
+    'ID',
+    'ID Macchina',
+    'Nome Macchina',
+    'ID Caso',
+    'Descrizione Caso',
+    'Data Creazione',
+    'Data Distruzione',
+    'Costo al Minuto',
+    'Azioni'
+]

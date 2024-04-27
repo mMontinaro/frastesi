@@ -3,5 +3,9 @@ export const constants = {
         accesa: "accesa",
         spenta: "spenta",
         distrutta: "distrutta",
+    },
+    statoCaso: {
+        aperto: "Aperto",
+        chiuso: "Chiuso"
     }
 }

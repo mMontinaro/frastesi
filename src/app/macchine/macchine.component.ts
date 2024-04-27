@@ -4,6 +4,7 @@ import { MacchineTableHeaders } from '../utils/table-headers';
 import { MacchinaService } from '../../services/macchina.service';
 import { SharedService } from '../../services/shared.service';
 import { constants } from '../utils/constants';
+import { environment } from '../../assets/environment';
 
 @Component({
   selector: 'app-macchine',
@@ -14,8 +15,8 @@ export class MacchineComponent {
 
   dataSource!: MacchinaDTO[];
   ready: boolean = false;
-  displayedColumns: string[] = MacchineTableHeaders;
   service!: MacchinaService;
+  isMock = environment.isMock;
 
   constructor(
     private sharedService: SharedService) {
@@ -24,45 +25,17 @@ export class MacchineComponent {
 
   ngOnInit(): void {
     this.retrieveDataSource();
-    this.ready = true;
-  }
-
-
-  eliminaMacchina(element: MacchinaDTO) {
-    this.sharedService.eliminaMockMacchina(element);
-  }
-
-  aggiornaMacchina(element: MacchinaDTO) {
-    let mock = true;
-    if (mock) {
-      switch (element.stato) {
-        case constants.statoMacchina.accesa:
-          element.stato = constants.statoMacchina.spenta;
-          break;
-        case constants.statoMacchina.spenta:
-          element.stato = constants.statoMacchina.accesa;
-          break;
-      } console.log("aggiorna macchina con id " + element.id_macchina);
-    } else {
-      this.service.aggiornaMacchina(element).subscribe(
-        response => {
-          if (response) {
-            this.retrieveDataSource();
-          }
-        }
-      );
-    }
   }
 
   retrieveDataSource() {
-    let mock = true
-    if (mock) {
+    if (this.isMock) {
       this.dataSource = this.sharedService.getMockListaMacchine();
     } else {
       this.service.getListaMacchine().subscribe(
         response => {
           if (response) {
             this.dataSource = response;
+            this.ready = true;
           }
         }
       )

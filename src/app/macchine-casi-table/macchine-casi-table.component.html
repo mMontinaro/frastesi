@@ -1,0 +1,67 @@
+<label class="col-3 mx-2" for="sel-macchina">Selezionare una Macchina</label>
+<label class="col-3 mx-2" for="sel-caso">Selezionare un Caso</label>
+<br>
+<select class="col-3 mx-2" name="newMC.idMacchina" id="sel-macchina" [(ngModel)]="newMC.idMacchina">
+    <option *ngFor="let e of listaMacchine" value="{{e.id_macchina}}">{{e.id_macchina}} - {{e.nomeMacchina}}</option>
+</select>
+
+<select class="col-3 mx-2" name="newMC.idCaso" id="sel-caso" [(ngModel)]="newMC.idCaso">
+    <option *ngFor="let e of listaCasi" value="{{e.id}}">{{e.id}} - {{e.descrizione}}</option>
+</select>
+
+<br>
+<button class="my-3 mx-2" type="button" title="addMacchinaCaso" (click)="addMacchinaCaso()">Aggiungi Macchina Caso</button>
+
+
+<table mat-table [dataSource]="ds" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ID Macchina">
+        <th mat-header-cell *matHeaderCellDef> ID Macchina </th>
+        <td mat-cell *matCellDef="let element"> {{element.macchina.id_macchina }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Nome Macchina">
+        <th mat-header-cell *matHeaderCellDef> Nome Macchina </th>
+        <td mat-cell *matCellDef="let element"> {{element.macchina.nomeMacchina }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ID Caso">
+        <th mat-header-cell *matHeaderCellDef> ID Caso </th>
+        <td mat-cell *matCellDef="let element"> {{element.caso.id }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Descrizione Caso">
+        <th mat-header-cell *matHeaderCellDef> Descrizione Caso </th>
+        <td mat-cell *matCellDef="let element"> {{element.caso.descrizione }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Data Creazione">
+        <th mat-header-cell *matHeaderCellDef> Data Creazione </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataCreazione | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Data Distruzione">
+        <th mat-header-cell *matHeaderCellDef> Data Distruzione </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataDistruzione | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Costo al Minuto">
+        <th mat-header-cell *matHeaderCellDef> Costo al Minuto </th>
+        <td mat-cell *matCellDef="let element"> {{element.costoMinuto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Azioni">
+        <th mat-header-cell *matHeaderCellDef> Azioni </th>
+        <td mat-cell *matCellDef="let element">
+            ciao
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
