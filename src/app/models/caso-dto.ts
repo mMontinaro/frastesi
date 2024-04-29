@@ -1,5 +1,5 @@
 export class CasoDTO {
-    id?: number;
+    id_caso?: number;
     descrizione?: string;
     dataCreazione?: Date;
     dataChiusura?: Date;

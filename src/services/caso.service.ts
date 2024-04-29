@@ -33,7 +33,7 @@ export class CasoService {
     }
 
     salveCaso(casoDTO: CasoDTO): Observable<CasoDTO> {
-        if(casoDTO.id) {
+        if(casoDTO.id_caso) {
             return this.updateCaso(casoDTO);
         } else {
             return this.saveCaso(casoDTO)
@@ -41,7 +41,7 @@ export class CasoService {
     } 
 
     updateCaso(casoDTO: CasoDTO): Observable<CasoDTO> {
-        let url = this.baseUrl.concat("/chiudi/" + casoDTO.id);
+        let url = this.baseUrl.concat("/chiudi/" + casoDTO.id_caso);
         this.printUrl(url);
         return this.http.put<CasoDTO>(url, casoDTO);
     }
