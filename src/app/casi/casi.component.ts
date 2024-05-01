@@ -33,6 +33,7 @@ export class CasiComponent implements OnInit {
 
   constructor(
     private sharedService: SharedService,
+    private casoService: CasoService,
     private cdRef: ChangeDetectorRef) {
     this.service = sharedService.casoService;
     this.macchinaCasoService = sharedService.macchinaCasoService;
@@ -44,11 +45,11 @@ export class CasiComponent implements OnInit {
   }
 
   eliminaCaso(element: CasoDTO) {
-    if (this.isMock) {
-      this.sharedService.eliminaMockCaso(element);
-    } else {
-      this.service.eliminaCaso(element);
+      this.casoService.eliminaCaso(element);
     }
+
+  chiudiCaso(element: CasoDTO) {
+      this.casoService.chiudiCaso(element);
   }
 
   retrieveDataSource() {

@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { CostiComponent } from './costi/costi.component';
 import { CostiTableComponent } from './costi/costi-table/costi-table.component';
 import { UsageMetricComponent } from './usage-metric/usage-metric.component';
-
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { UsageMetricComponent } from './usage-metric/usage-metric.component';
     FontAwesomeModule,
     MatTableModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ],
   providers: [
     provideAnimationsAsync()

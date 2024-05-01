@@ -12,7 +12,8 @@ export class SideMenuComponent {
   menuItems: MenuItem[] = [
     { label: 'Home', url: 'home' },
     { label: 'Casi', url: 'casi' },
-    { label: 'Macchine', url: 'macchine' }
+    { label: 'Macchine', url: 'macchine' },
+    { label: 'Grafico metriche', url: 'metrics'}
     // Add more menu items here as needed
   ];
 

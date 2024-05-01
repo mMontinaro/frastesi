@@ -1,10 +1,7 @@
+<select [(ngModel)]="selectedInstanceId" (change)="updateChart()">
+        <option *ngFor="let id of instanceIds" [value]="id">{{ id }}</option>
+</select>
+      
 <div class="chart-container">
-    <!-- Canvas per il grafico Chart.js -->
-    <canvas baseChart
-            [data]="chartData"
-            [options]="chartOptions"
-            [type]="chartType"
-            [plugins]="chartPlugins">
-    </canvas>
-  </div>
-  
+        <canvas id="myChart"></canvas>
+</div>
