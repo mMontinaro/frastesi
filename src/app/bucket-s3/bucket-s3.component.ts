@@ -17,7 +17,7 @@ export class BucketS3Component implements OnInit {
   isMock = environment.isMock;
   isSelected!: boolean;
   bucketName?: string;
-  fileContent?: string;
+  fileContent?: any;
   bucketTitle?: string;
   key?: string;
 
@@ -52,6 +52,7 @@ export class BucketS3Component implements OnInit {
 
   showFileContents(key: string) {
     this.key = key;
+    this.isSelected = true;
     if (this.isMock) {
       this.fileContent = key + this.sharedService.getMockFileContentsByKey() ;
       this.isSelected = true;
@@ -59,8 +60,9 @@ export class BucketS3Component implements OnInit {
       if (this.bucketName) {
         this.service.getFileContentsByBucketNameAndKey(this.bucketName, key).subscribe(
           response => {
-            this.fileContent = response;
-            this.isSelected = true;
+            if(response) {
+              this.fileContent = response;
+            }
           }
         )
       }

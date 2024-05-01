@@ -19,13 +19,13 @@ export class BucketService {
         return this.http.get<string[]>(url, {params: params});
     }
     
-    getFileContentsByBucketNameAndKey(bucketName: string, key: string): Observable<string> {
+    getFileContentsByBucketNameAndKey(bucketName: string, key: string): Observable<any> {
         let url = this.baseUrl.concat("getS3ObjectContent");
         let params = new HttpParams()
             .set('bucketName', bucketName)
             .set('key', key);
         this.printUrl(url);
-        return this.http.get<string>(url, {params: params});
+        return this.http.get<string>(url, { params: params, responseType: 'text' as 'json' });
     }
 
     printUrl(url: string) {

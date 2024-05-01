@@ -1,5 +1,5 @@
 export const environment = {
-    isMock: true,
+    isMock: false,
     casoApi: {
         baseUrl: "http://127.0.0.1:8080/casi",
         basePostUrl: "http://127.0.0.1:8080/creaCaso",
