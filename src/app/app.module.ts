@@ -24,6 +24,8 @@ import { CostiComponent } from './costi/costi.component';
 import { CostiTableComponent } from './costi/costi-table/costi-table.component';
 import { UsageMetricComponent } from './usage-metric/usage-metric.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { BucketS3Component } from './bucket-s3/bucket-s3.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { MatInputModule } from '@angular/material/input';
     MacchineCasiTableComponent,
     CostiComponent,
     CostiTableComponent,
-    UsageMetricComponent
+    UsageMetricComponent,
+    BucketS3Component
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatSelectModule, 
     MatButtonModule,
+    MatCardModule,
     FontAwesomeModule,
     MatTableModule,
     HttpClientModule,

@@ -39,3 +39,9 @@ export const CostiTableHeaders =
     'Costo al Minuto',
     'Costo Generato'
 ]
+
+export const BucketS3Headers =
+[
+    'Key',
+    'Azioni'
+]
