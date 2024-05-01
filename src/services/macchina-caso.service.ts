@@ -17,14 +17,16 @@ export class MacchinaCasoService {
     getListaMacchineCasi(): Observable<MacchinaCasoDTO[]> {
         let url = this.baseUrl.concat("macchineCasi");
         this.printUrl(url);
-        return this.http.get<MacchinaCasoDTO[]>(this.baseUrl);
+        return this.http.get<MacchinaCasoDTO[]>(url);
     }
     
 
     salvaMacchinaCaso(mcDTO: MacchinaCasoDTO): Observable<MacchinaCasoDTO> {
         let url = this.baseUrl.concat("creaMacchinaCaso");
         this.printUrl(url);
-        return this.http.put<MacchinaCasoDTO>(url, mcDTO);
+        mcDTO.idCaso = Number(mcDTO.idCaso);
+        mcDTO.idMacchina = Number(mcDTO.idMacchina);
+        return this.http.post<MacchinaCasoDTO>(url, mcDTO);
     } 
 
     printUrl(url: string) {

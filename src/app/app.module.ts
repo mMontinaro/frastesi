@@ -20,6 +20,10 @@ import { MacchineTableComponent } from './macchine/macchine-table/macchine-table
 import { CasiTableComponent } from './casi/casi-table/casi-table.component';
 import { MacchineCasiTableComponent } from './macchine-casi-table/macchine-casi-table.component';
 import { FormsModule } from '@angular/forms';
+import { CostiComponent } from './costi/costi.component';
+import { CostiTableComponent } from './costi/costi-table/costi-table.component';
+import { UsageMetricComponent } from './usage-metric/usage-metric.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { FormsModule } from '@angular/forms';
     MacchineComponent,
     MacchineTableComponent,
     CasiTableComponent,
-    MacchineCasiTableComponent
+    MacchineCasiTableComponent,
+    CostiComponent,
+    CostiTableComponent,
+    UsageMetricComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,8 @@ import { FormsModule } from '@angular/forms';
     FontAwesomeModule,
     MatTableModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ],
   providers: [
     provideAnimationsAsync()

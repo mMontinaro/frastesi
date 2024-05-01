@@ -1,0 +1,14 @@
+.creazione-caso-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+mat-form-field {
+    width: 100%; /* Regola la larghezza come necessario */
+}
+
+button {
+    margin-top: 20px;
+}

@@ -25,30 +25,33 @@ export class CasoService {
         return this.http.get<CasoDTO>(url);
     }
     
-    eliminaCaso(id: CasoDTO): void{
-        let url = this.baseUrl.concat("/elimina/" + id);
+    eliminaCaso(casoDTO: CasoDTO): Observable<any> {
+        let url = this.baseUrl.concat("/elimina/" + casoDTO.id_caso);
         this.printUrl(url);
-        const o = this.http.delete<CasoDTO>(url);
-        return;
+        return this.http.delete<CasoDTO>(url);
     }
 
+    chiudiCaso(casoDTO: CasoDTO): Observable<CasoDTO> {
+        let url = this.baseUrl.concat("/chiudi/" + casoDTO.id_caso);
+        this.printUrl(url);
+        return this.http.put<CasoDTO>(url, casoDTO);
+    }
+    
     salveCaso(casoDTO: CasoDTO): Observable<CasoDTO> {
-        if(casoDTO.id) {
-            return this.updateCaso(casoDTO);
+        if(casoDTO.id_caso) {
+            return this.chiudiCaso(casoDTO);
         } else {
             return this.saveCaso(casoDTO)
         }
     } 
 
-    updateCaso(casoDTO: CasoDTO): Observable<CasoDTO> {
-        let url = this.baseUrl.concat("/chiudi/" + casoDTO.id);
-        this.printUrl(url);
-        return this.http.put<CasoDTO>(url, casoDTO);
-    }
-
     saveCaso(casoDTO: CasoDTO): Observable<CasoDTO> {
         this.printUrl(this.basePostUrl);
         return this.http.post<CasoDTO>(this.basePostUrl, casoDTO);
+    }
+
+    creaCaso(nuovoCaso: any) {
+        return this.http.post(this.basePostUrl, nuovoCaso);
     }
 
     printUrl(url: string) {

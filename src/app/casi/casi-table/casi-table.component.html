@@ -2,7 +2,7 @@
 
     <ng-container matColumnDef="ID">
         <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.id_caso}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Descrizione">
@@ -28,14 +28,14 @@
     <ng-container matColumnDef="Azioni">
         <th mat-header-cell *matHeaderCellDef> Azioni </th>
         <td mat-cell *matCellDef="let element">
-            <span style="text-align: center; vertical-align: middle;" (click)="chiudiCaso(element)" *ngIf="element.stato == 'Aperto'">
-                <i class="fas fa-circle-xmark"></i>
-            </span>
-            <span class="trash-icon" style="text-align: center; vertical-align: middle;" (click)="eliminaCaso(element)" *ngIf="element.stato == 'Aperto'">
-                <i class="fas fa-trash-alt"></i>
+            <span class="icon-close" style="text-align: center; vertical-align: middle; padding-right: 1rem;" (click)="chiudiCaso(element)" *ngIf="element.stato == 'Aperto'">
+                <i class="fas fa-times"></i>
             </span>
             <span class="trash-icon" style="text-align: center; vertical-align: middle;" *ngIf="element.stato == 'Chiuso'">
                 <i class="fas fa-rotate-left"></i>
+            </span>
+            <span class="trash-icon" style="text-align: center; vertical-align: middle;" (click)="eliminaCaso(element)">
+                <i class="fas fa-trash-alt"></i>
             </span>
         </td>
     </ng-container>
@@ -43,3 +43,12 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<div class="creazione-caso-container">
+    <h2>Creazione Nuovo Caso</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Descrizione del Caso</mat-label>
+        <input matInput [(ngModel)]="nuovoCasoDescrizione">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="creaCaso(nuovoCasoDescrizione)">Crea Nuovo Caso</button>
+</div>

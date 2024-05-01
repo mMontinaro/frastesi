@@ -32,3 +32,10 @@ export const MacchineCasiTableHeaders =
     'Costo al Minuto',
     'Azioni'
 ]
+
+export const CostiTableHeaders =
+[
+    'ID Macchina',
+    'Costo al Minuto',
+    'Costo Generato'
+]

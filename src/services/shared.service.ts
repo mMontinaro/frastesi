@@ -7,6 +7,9 @@ import { MacchinaDTO } from '../app/models/macchina-dto';
 import { constants } from '../app/utils/constants';
 import { MacchinaCasoDTO } from '../app/models/macchina-caso-dto';
 import { MacchinaCasoService } from './macchina-caso.service';
+import { CostiService } from './costi.service';
+import { MetricService } from './metric.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,9 @@ export class SharedService {
     protected mockService: MockService,
     public casoService: CasoService,
     public macchinaService: MacchinaService,
-    public macchinaCasoService: MacchinaCasoService
+    public macchinaCasoService: MacchinaCasoService,
+    public costiService: CostiService,
+    public metricService: MetricService
   ) { }
 
   getMockListaCasi(): CasoDTO[]{
@@ -24,12 +29,12 @@ export class SharedService {
   }
 
   eliminaMockCaso(element: CasoDTO){
-    console.log("elminato caso con id " + element.id)
+    console.log("elminato caso con id " + element.id_caso)
   }
   
   chiudiMockCaso(element: CasoDTO){
     element.stato = constants.statoCaso.chiuso;
-    console.log("chiuso caso con id " + element.id)
+    console.log("chiuso caso con id " + element.id_caso)
   }
 
   getMockListaMacchine(): MacchinaDTO[]{
