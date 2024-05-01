@@ -59,6 +59,7 @@ export class CasiComponent implements OnInit {
         response => {
           if (response) {
             this.dataSource = response;
+            this.cdRef.detectChanges();
           }
         }
       )
@@ -67,11 +68,10 @@ export class CasiComponent implements OnInit {
 
   emit() {
     if (this.isMock) {
-     
+
     } else {
       this.retrieveDS();
     }
-    this.cdRef.detectChanges();
   }
 
   retrieveDS() {
@@ -82,7 +82,7 @@ export class CasiComponent implements OnInit {
         response => {
           if (response) {
             this.ds = response;
-            this.ready = true;
+            this.cdRef.detectChanges();
           }
         }
       )
