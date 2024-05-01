@@ -51,3 +51,34 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<form (ngSubmit)="creaMacchina()">
+    <div>
+      <label for="nomeMacchina">Nome Macchina:</label>
+      <input id="nomeMacchina" [(ngModel)]="macchina.nomeMacchina" name="nomeMacchina" type="text" required>
+    </div>
+    <div>
+      <label for="sistemaOperativo">Sistema Operativo:</label>
+      <select id="sistemaOperativo" [(ngModel)]="macchina.sistemaOperativo" name="sistemaOperativo" (change)="updateProgrammi()" required>
+        <option *ngFor="let so of sistemiOperativi" [value]="so.id">{{ so.name }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="configurazioneHW">Configurazione HW:</label>
+      <select id="configurazioneHW" [(ngModel)]="macchina.configurazioneHW" name="configurazioneHW" required>
+        <option *ngFor="let config of configurazioniHW" [value]="config.id">{{ config.name }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="volume">Volume Memoria (GB):</label>
+      <input id="volume" [(ngModel)]="macchina.volume" name="volume" type="text" required>
+    </div>
+    <div>
+      <label for="programma">Programma:</label>
+      <select id="programma" [(ngModel)]="macchina.programma" name="programma" required>
+        <option *ngFor="let prog of macchina.sistemaOperativo === 'ubuntu' ? programmi.ubuntu : programmi.windows" [value]="prog">{{ prog }}</option>
+      </select>
+    </div>
+    <button type="submit">Crea Macchina</button>
+  </form>
+  

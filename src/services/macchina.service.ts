@@ -40,11 +40,11 @@ export class MacchinaService {
         }
     }
 
-    saveMacchina(macchinaDTO: MacchinaDTO): Observable<MacchinaDTO> {
+    creaMacchina(macchina: MacchinaDTO): Observable<MacchinaDTO> {
         let url = this.baseUrl.concat("creaMacchina");
         this.printUrl(url);
-        return this.http.post<MacchinaDTO>(url, macchinaDTO);
-    }
+        return this.http.post<MacchinaDTO>(url, macchina);
+      }
     
     printUrl(url: string) {
         console.log("URL called: " + url);

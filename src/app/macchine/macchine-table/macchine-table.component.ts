@@ -17,6 +17,24 @@ export class MacchineTableComponent {
   displayedColumns: string[] = MacchineTableHeaders;
   service!: MacchinaService;
   isMock = environment.isMock;
+  macchina: MacchinaDTO = new MacchinaDTO();
+
+
+  sistemiOperativi = [
+    { id: 'windows', name: 'Windows Server 2022' },
+    { id: 'ubuntu', name: 'Ubuntu Server' }
+  ];
+
+  configurazioniHW = [
+    { id: 't2.micro', name: 't2.micro' },
+    { id: 't2.medium', name: 't2.medium' },
+    { id: 't2.large', name: 't2.large' }
+  ];
+
+  programmi = {
+    windows: ['Autopsy', 'Notepad++'],
+    ubuntu: ['The Sleuth Kit', 'ftkimager']
+  };
 
   constructor(
     private sharedService: SharedService) {
@@ -52,4 +70,21 @@ export class MacchineTableComponent {
       );
     }
   }
+
+  creaMacchina() {
+    this.service.creaMacchina(this.macchina).subscribe(
+      response => {
+        console.log('VM creata con successo:', response);
+        // Aggiungi qui logiche di post-creazione, come notifiche o reindirizzamenti
+      },
+      error => {
+        console.error('Errore durante la creazione della VM:', error);
+      }
+    );
+  }
+
+  updateProgrammi() {
+    this.macchina.programma = '';  // Resetta il programma quando cambia il SO
+  }
+
 }
