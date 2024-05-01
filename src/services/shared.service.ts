@@ -9,6 +9,7 @@ import { MacchinaCasoDTO } from '../app/models/macchina-caso-dto';
 import { MacchinaCasoService } from './macchina-caso.service';
 import { CostiService } from './costi.service';
 import { MetricService } from './metric.service';
+import { BucketService } from './bucket.service';
 
 
 @Injectable({
@@ -21,7 +22,8 @@ export class SharedService {
     public macchinaService: MacchinaService,
     public macchinaCasoService: MacchinaCasoService,
     public costiService: CostiService,
-    public metricService: MetricService
+    public metricService: MetricService,
+    public bucketService: BucketService,
   ) { }
 
   getMockListaCasi(): CasoDTO[]{
@@ -49,5 +51,12 @@ export class SharedService {
     return this.mockService.getMockListMacchineCasi();
   }
 
+  getMockListaKeysByBucketName(): string[] {
+    return this.mockService.getMockListaKeysByBucketName();
+  }
+
+  getMockFileContentsByKey(): string {
+    return this.mockService.getMockFileContentsByKey();
+  }
 
 }

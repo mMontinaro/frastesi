@@ -21,6 +21,14 @@ export class MockService {
         return listaMacchineCasi;
     }
 
+    getMockListaKeysByBucketName(): string[] {
+        return listaBucketKeys;
+    }
+
+    getMockFileContentsByKey(): string {
+        return "file contents lolaskdfjlkasjdlfkjaldksjflkjsadflkjasdfa lorem ipsum"
+    }
+
 }
 
 export const listaCasi: CasoDTO[] = [
@@ -47,6 +55,12 @@ export const listaMacchine: MacchinaDTO[] = [
 
 export const listaMacchineCasi: MacchinaCasoDTO[] = [
     { id: 1, macchina: listaMacchine[0], caso: listaCasi[0], dataCreazione: new Date("2024-04-15 16:48:49.000000"), dataDistruzione: new Date("2024-04-20 16:48:49.000000"), costoMinuto: 10, idCaso: 1, idMacchina: 1 },
-    { id: 2, macchina: listaMacchine[1], caso: listaCasi[2], dataCreazione: new Date("2024-04-15 16:48:49.000000"), dataDistruzione: new Date("2024-04-20 16:48:49.000000"), costoMinuto: 10, idCaso: 3, idMacchina: 2 }
-        
+    { id: 2, macchina: listaMacchine[1], caso: listaCasi[2], dataCreazione: new Date("2024-04-15 16:48:49.000000"), dataDistruzione: new Date("2024-04-20 16:48:49.000000"), costoMinuto: 10, idCaso: 3, idMacchina: 2 }  
+]
+
+export const listaBucketKeys: string[] = [
+    "key1",
+    "key2",
+    "key3",
+    "key4"
 ]
