@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { MetricService } from '../../services/metric.service';
-import { Chart, registerables} from '../../../node_modules/chart.js';
+import { Chart, ChartType, registerables, ChartConfiguration, ChartTypeRegistry } from 'chart.js';
 import { MetricsDTO } from '../models/metrics-dto';
-Chart.register(...registerables)
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-usage-metric',
   templateUrl: './usage-metric.component.html',
-  styleUrl: './usage-metric.component.scss',
+  styleUrls: ['./usage-metric.component.scss'],
 })
-export class UsageMetricComponent implements OnInit{
-  chartData: any;
-  public chart!: Chart;
-  public instanceIds: string[] = [];  // Lista degli instanceIds disponibili
-  public selectedInstanceId: string = '';  // ID selezionato
+export class UsageMetricComponent implements OnInit {
+  public cpuChart?: Chart;
+  public ramChart?: Chart;
+  public instanceIds: string[] = [];
+  public selectedInstanceId: string = '';
 
-  constructor(private service:MetricService) {}
+  constructor(private service: MetricService) {}
 
   ngOnInit() {
-      this.loadInstanceIds();  // Carica gli instanceIds al caricamento del componente
-      this.updateChart();  // Carica il grafico iniziale
-    };
+    this.loadInstanceIds();
+  }
 
   loadInstanceIds() {
-    // Implementa una chiamata API per ottenere gli instanceIds (mockup per ora)
     this.service.getInstanceIds().subscribe(ids => {
       this.instanceIds = ids;
       if (ids.length > 0) {
-        this.selectedInstanceId = ids[0];  // Seleziona il primo ID per default
-        this.updateChart();  // Aggiorna il grafico con il primo ID
+        this.selectedInstanceId = ids[0];
+        this.updateChart();
       }
     });
   }
@@ -39,40 +37,52 @@ export class UsageMetricComponent implements OnInit{
       return;
     }
     this.service.getMetricsByInstanceId(this.selectedInstanceId).subscribe(data => {
-      this.createChart(data);
+      this.createCharts(data);
     });
   }
 
-  createChart(data: MetricsDTO[]) {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+  createCharts(data: MetricsDTO[]) {
+    this.createChart(data, 'cpuChart', 'CPU Usage', 'cpuUsage', 'rgb(75, 192, 192)');
+    this.createChart(data, 'ramChart', 'Memory Usage', 'ramUsage', 'rgb(255, 99, 132)');
+}
+
+  createChart(data: MetricsDTO[], canvasId: string, label: string, key: keyof MetricsDTO, color: string) {
+    const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
     if (!canvas) {
-      console.error('Failed to find canvas element');
+      console.error(`Failed to find ${canvasId} element`);
       return;
     }
-
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       console.error('Failed to get 2D context');
       return;
     }
 
-    if (this.chart) {
-      this.chart.destroy();  // Distrugge il grafico precedente prima di crearne uno nuovo
+    // Distruggi il grafico esistente se già esiste
+    if (canvasId === 'cpuChart' && this.cpuChart) {
+      this.cpuChart.destroy();
+    } else if (canvasId === 'ramChart' && this.ramChart) {
+      this.ramChart.destroy();
     }
 
-    this.chart = new Chart(ctx, {
+    // Mappatura dei dati garantendo che tutti i valori siano 'number' o 'null'
+  const chartData = data.map(d => {
+    const value = d[key];
+    if (typeof value === 'number') {
+      return value;
+    } else {
+      return null;  // Usa 'null' come fallback se il valore non è un numero
+    }
+  });
+
+    const config: ChartConfiguration = {
       type: 'line',
       data: {
-        labels: data.map(d => d.timestamp ? d.timestamp.toLocaleString() : ''),  // Convert Date to string
+        labels: data.map(d => d.timestamp ? d.timestamp.toLocaleString() : ''),
         datasets: [{
-          label: 'CPU Usage',
-          data: data.map(d => d.cpuUsage ?? 0),  // Use zero if cpuUsage is undefined
-          borderColor: 'rgb(75, 192, 192)',
-          fill: false
-        }, {
-          label: 'Memory Usage',
-          data: data.map(d => d.ramUsage ?? 0),  // Use zero if ramUsage is undefined
-          borderColor: 'rgb(255, 99, 132)',
+          label: label,
+          data: chartData,
+          borderColor: color,
           fill: false
         }]
       },
@@ -84,6 +94,14 @@ export class UsageMetricComponent implements OnInit{
           }
         }
       }
-    });
+    };
+
+    const newChart = new Chart(ctx, config);
+
+    if (canvasId === 'cpuChart') {
+      this.cpuChart = newChart;
+    } else if (canvasId === 'ramChart') {
+      this.ramChart = newChart;
+    }
   }
 }

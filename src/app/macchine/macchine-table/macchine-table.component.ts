@@ -42,33 +42,36 @@ export class MacchineTableComponent {
   }
 
   eliminaMacchina(element: MacchinaDTO) {
-    if (this.isMock) {
-      this.sharedService.eliminaMockMacchina(element);
-    } else {
-      this.service.eliminaMacchina(element);
-    }
-    this.emit.emit();
+    this.service.eliminaMacchina(element).subscribe({
+      next: () => {
+        console.log('Macchina distrutta con successo');
+        this.dataSource = this.dataSource.filter(macchina => macchina.id_macchina !== element.id_macchina);
+        this.emit.emit();
+      },
+      error: (errore) => console.error('Errore nella destruzione della macchina', errore)
+    });
   }
 
-  aggiornaMacchina(element: MacchinaDTO) {
-    if (this.isMock) {
-      switch (element.stato) {
-        case constants.statoMacchina.accesa:
-          element.stato = constants.statoMacchina.spenta;
-          break;
-        case constants.statoMacchina.spenta:
-          element.stato = constants.statoMacchina.accesa;
-          break;
-      } console.log("aggiorna macchina con id " + element.id_macchina);
-    } else {
-      this.service.aggiornaMacchina(element).subscribe(
-        response => {
-          if (response) {
-            this.emit.emit();
-          }
-        }
-      );
-    }
+  accendiMacchina(element: MacchinaDTO) {
+    this.service.accendiMacchina(element).subscribe({
+      next: () => {
+        console.log('Macchina distrutta con successo');
+        this.dataSource = this.dataSource.filter(macchina => macchina.id_macchina !== element.id_macchina);
+        this.emit.emit();
+      },
+      error: (errore) => console.error('Errore nella destruzione della macchina', errore)
+    });
+  }
+
+  spegniMacchina(element: MacchinaDTO) {
+    this.service.spegniMacchina(element).subscribe({
+      next: () => {
+        console.log('Macchina distrutta con successo');
+        this.dataSource = this.dataSource.filter(macchina => macchina.id_macchina !== element.id_macchina);
+        this.emit.emit();
+      },
+      error: (errore) => console.error('Errore nella destruzione della macchina', errore)
+    });
   }
 
   creaMacchina() {

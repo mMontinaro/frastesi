@@ -1,4 +1,9 @@
-#myChart {
-    width: 100%; // Adatta la larghezza al 100% del contenitore padre
-    height: 500px; // Altezza fissa
-  }
+/* UsageMetricComponent.scss */
+.chart-container canvas {
+  width: 100%; // Adatta la larghezza al 100% del contenitore padre
+  height: 500px; // Altezza fissa
+}
+
+.chart-container {
+  margin-bottom: 20px; // Aggiunge spazio tra i grafici
+}

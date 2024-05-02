@@ -11,10 +11,11 @@ export const CasiTableHeaders =
 export const MacchineTableHeaders =
 [
     'ID',
+    'instanceId',
     'Nome',
     'Stato',
     'Indirizzo IP',
-    'Tempo di Accensione (sec)',
+    'Tempo di Accensione (min)',
     'Data Creazione',
     'Data Distruzione',
     'Azioni'

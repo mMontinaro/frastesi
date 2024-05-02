@@ -20,25 +20,24 @@ export class MacchinaService {
         return this.http.get<MacchinaDTO[]>(url);
     }
     
-    eliminaMacchina(id: MacchinaDTO): void{
-        let url = this.baseUrl.concat("elimina/" + id);
+    eliminaMacchina(macchinaDto: MacchinaDTO): Observable<MacchinaDTO> {
+        let url = this.baseUrl.concat("eliminaMacchina/" + macchinaDto.id_macchina);
         this.printUrl(url);
-        const o = this.http.delete<MacchinaDTO>(url);
-        console.log(o.toString());
-        return;
+        return this.http.delete<MacchinaDTO>(url);
+        //console.log(o.toString());
     }
 
-    aggiornaMacchina(macchinaDTO: MacchinaDTO): Observable<MacchinaDTO> {
-        if(macchinaDTO.stato && macchinaDTO.stato == constants.statoMacchina.accesa) {
-            let url = this.baseUrl.concat("spegniMacchina/" + macchinaDTO.id_macchina);
-            this.printUrl(url);
-            return this.http.patch<MacchinaDTO>(url, null);
-        } else {
-            let url = this.baseUrl.concat("accendiMacchina/" + macchinaDTO.id_macchina);
-            this.printUrl(url);
-            return this.http.patch<MacchinaDTO>(url, null);
-        }
-    }
+    accendiMacchina(macchinaDTO: MacchinaDTO): Observable<MacchinaDTO> {
+        let url = this.baseUrl.concat("accendiMacchina/" + macchinaDTO.id_macchina);
+        this.printUrl(url);
+        return this.http.put<MacchinaDTO>(url, macchinaDTO);
+    } 
+        
+    spegniMacchina(macchinaDTO: MacchinaDTO): Observable<MacchinaDTO> {
+        let url = this.baseUrl.concat("spegniMacchina/" + macchinaDTO.id_macchina);
+        this.printUrl(url);
+        return this.http.put<MacchinaDTO>(url, macchinaDTO);
+     }
 
     creaMacchina(macchina: MacchinaDTO): Observable<MacchinaDTO> {
         let url = this.baseUrl.concat("creaMacchina");

@@ -27,6 +27,26 @@ export class MacchineComponent {
     this.retrieveDataSource();
   }
 
+  emit() {
+    if (this.isMock) {
+
+    } else {
+      this.retrieveDataSource();
+    }
+  }
+
+  eliminaMacchine(element: MacchinaDTO) {
+    this.service.eliminaMacchina(element);
+  }
+
+  accendiMacchina(element: MacchinaDTO) {
+    this.service.accendiMacchina(element);
+  }
+
+  spegniMacchina(element: MacchinaDTO) {
+    this.service.spegniMacchina(element);
+}
+
   retrieveDataSource() {
     if (this.isMock) {
       this.dataSource = this.sharedService.getMockListaMacchine();

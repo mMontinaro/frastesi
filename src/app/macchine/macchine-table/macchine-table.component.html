@@ -5,6 +5,11 @@
         <td mat-cell *matCellDef="let element"> {{element.id_macchina}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="instanceId">
+      <th mat-header-cell *matHeaderCellDef> instanceId </th>
+      <td mat-cell *matCellDef="let element"> {{element.instanceId}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="Nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
         <td mat-cell *matCellDef="let element"> {{element.nomeMacchina}} </td>
@@ -20,31 +25,51 @@
         <td mat-cell *matCellDef="let element"> {{element.indirizzoIP}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Tempo di Accensione (sec)">
-        <th mat-header-cell *matHeaderCellDef> Tempo di Accensione (sec) </th>
+    <ng-container matColumnDef="Tempo di Accensione (min)">
+        <th mat-header-cell *matHeaderCellDef> Tempo di Accensione (min) </th>
         <td mat-cell *matCellDef="let element"> {{element.tempoAccensione}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Data Creazione">
         <th mat-header-cell *matHeaderCellDef> Data Creazione </th>
-        <td mat-cell *matCellDef="let element"> {{element.dataCreazione | date: 'dd/MM/yyyy' }} </td>
+        <td mat-cell *matCellDef="let element"> {{element.dataCreazione | date: 'dd/MM/yyyy HH:mm:ss' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="Data Distruzione">
         <th mat-header-cell *matHeaderCellDef> Data Distruzione </th>
-        <td mat-cell *matCellDef="let element"> {{element.dataDistruzione | date: 'dd/MM/yyyy' }} </td>
+        <td mat-cell *matCellDef="let element"> {{element.dataDistruzione | date: 'dd/MM/yyyy HH:mm:ss' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="Azioni">
         <th mat-header-cell *matHeaderCellDef> Azioni </th>
         <td mat-cell *matCellDef="let element">
-            <span style="text-align: center; vertical-align: middle;" (click)="aggiornaMacchina(element)">
-                <i *ngIf="element.stato == 'accesa'" class="fas fa-power-off"></i>
-                <i *ngIf="element.stato == 'spenta'" class="fas fa-play"></i>
+          <ng-container *ngIf="element.stato !== 'distrutta'">
+            <span style="text-align: center; vertical-align: middle;"
+                  *ngIf="element.stato === 'spenta'" 
+                  (click)="accendiMacchina(element)">
+              <i class="fas fa-play"></i>
             </span>
-            <span class="trash-icon" style="text-align: center; vertical-align: middle;" *ngIf="element.stato == 'distrutta'">
-                <i class="fas fa-ban"></i>
+          
+            <!-- Icona per spegnere la macchina, visibile solo se la macchina è accesa -->
+            <span style="text-align: center; vertical-align: middle;" 
+                  *ngIf="element.stato === 'accesa'" 
+                  (click)="spegniMacchina(element)">
+              <i class="fas fa-power-off"></i>
             </span>
+          </ng-container>
+          
+          <!-- Icona del cestino, visibile solo se la macchina è accesa o spenta (e non distrutta) -->
+          <span class="trash-icon" style="text-align: center; vertical-align: middle;"
+                *ngIf="element.stato === 'accesa' || element.stato === 'spenta'" 
+                (click)="eliminaMacchina(element)">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+          
+          <!-- Icona di stato 'distrutta', visibile solo se la macchina è distrutta -->
+          <span class="trash-icon" style="text-align: center; vertical-align: middle;" 
+                *ngIf="element.stato === 'distrutta'">
+            <i class="fas fa-ban"></i>
+          </span>
         </td>
     </ng-container>
 
